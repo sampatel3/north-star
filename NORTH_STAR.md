@@ -79,6 +79,10 @@ These are settled. They are CI-gated or convention-gated. Agents must uphold the
    silently-diverged one is not.
 4. **Self-maintaining rule:** any architectural change you make must, in the *same
    PR*, either update `model.yaml` (+ affected views) or add an ADR — usually both.
+   This file holds the *platform-level* canonical reference; **per-product objectives,
+   non-goals, and decision principles live in each brand repo's own `NORTH_STAR.md`**
+   (e.g. `tali-platform/NORTH_STAR.md`, `cadence/NORTH_STAR.md`), which inherit these
+   invariants and are graded against them.
 
 ## Where things live
 
