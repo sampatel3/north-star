@@ -13,8 +13,8 @@
 metadata:
   name: Platform North Star
   schemaVersion: 1
-  modelVersion: 1
-  updated: "2026-05-29"
+  modelVersion: 2
+  updated: "2026-05-30"   # ADR-0009: tali-platform reclassified legacy -> brand; taali-brand -> deprecated
   vocabulary: C4
 
 # ---------------------------------------------------------------------------
@@ -31,16 +31,21 @@ repos:
       brand-agnostic home of all cross-cutting capability.
     localPathEnv: MAINSPRING_PATH
   - id: taali-brand
-    role: brand
-    description: A brand on the substrate (AI-augmented technical assessment surface).
+    role: deprecated
+    description: >
+      DEPRECATED throwaway validation harness — to be deleted. NOT a live target and
+      NOT the migration vehicle. The live Taali hiring brand is tali-platform (see ADR-0009).
     localPathEnv: TAALI_PATH
   - id: cadence
     role: brand
     description: A brand on the substrate.
     localPathEnv: CADENCE_PATH
   - id: tali-platform
-    role: legacy
-    description: Legacy monolith. Do not extend; migrate capabilities into substrate/brand when touched.
+    role: brand
+    description: >
+      The live Taali hiring brand (ADR-0009). Currently a standalone monolith that hosts
+      its own copy of substrate-class capabilities; these are migration debt on the
+      convergence queue to mainspring (migratesTo), not new architecture to grow.
     localPathEnv: TALI_PLATFORM_PATH   # defaults to "." so this checkout is verifiable
 
 # ---------------------------------------------------------------------------
@@ -89,10 +94,13 @@ containers:
     description: Cross-cutting services consumed by every brand. Owns invariant-bearing components.
 
   - id: taali-surface
-    name: Taali Surface
+    name: Taali Surface (deprecated taali-brand harness)
     repo: taali-brand
     technology: TypeScript / React + Python brand services
-    description: Taali brand surface and brand-owned data/migrations on top of the substrate.
+    description: >
+      DEPRECATED — the taali-brand throwaway harness. Superseded by the live Taali brand
+      hosted in tali-platform (see the taali-backend container). Kept only as a package-shape
+      reference; slated for deletion (ADR-0009).
 
   - id: cadence-surface
     name: Cadence Surface
@@ -100,11 +108,15 @@ containers:
     technology: TypeScript / React + Python brand services
     description: Cadence brand surface and brand-owned data/migrations on top of the substrate.
 
-  - id: legacy-backend
-    name: Legacy Backend
+  - id: taali-backend
+    name: Taali Backend (live brand)
     repo: tali-platform
     technology: Python / FastAPI
-    description: Legacy monolith. Source of capabilities being migrated to substrate/brand.
+    description: >
+      The live Taali hiring brand. Today a standalone monolith that hosts its own copy of
+      substrate-class capabilities (agent runtime, decision-policy engine + governance loop,
+      metering, knowledge graph, compliance) — migration debt to drain into mainspring, not
+      new architecture. See ADR-0009 for the convergence queue.
     implementation:
       repo: tali-platform
       paths:
