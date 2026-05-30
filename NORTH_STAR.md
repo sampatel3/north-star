@@ -29,8 +29,11 @@ surface, positioning, and data; they do **not** fork the substrate.
                  └───────────────┘
 ```
 
-`tali-platform` is **legacy**. Do not extend it; migrate capabilities out of it into
-the substrate/brand model when touched.
+`tali-platform` is **the live Taali hiring brand** (ADR-0009). It currently hosts its own
+copy of substrate-class capabilities (agent runtime, decision-policy engine + governance
+loop, metering, knowledge graph, compliance); these are **migration debt** to drain into
+`mainspring`, not new architecture to grow. `taali-brand` is a **deprecated** throwaway
+harness, slated for deletion.
 
 ## The boundary that matters most: substrate vs brand
 
