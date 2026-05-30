@@ -20,6 +20,9 @@ Format: the lightweight one popularised by Michael Nygard. (Same convention as
 | 0007 | Agent injection via a synced CLAUDE.md block       | Accepted |
 | 0008 | Role-aware agent blocks (substrate/brand/legacy)   | Accepted |
 | 0009 | `tali-platform` is the live Taali brand (not legacy); `taali-brand` retired | Accepted |
+| 0010 | Taali↔Mainspring convergence strategy (seams-first, metering-first) | Accepted |
+| 0011 | Federated per-brand operational view until convergence        | Accepted |
+| 0012 | Shared cross-repo conventions                                 | Accepted |
 
 ## Conventions
 
