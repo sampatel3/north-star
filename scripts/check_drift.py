@@ -30,11 +30,11 @@ except ImportError:
 ROOT = Path(__file__).resolve().parent.parent
 MODEL = ROOT / "architecture" / "model" / "model.yaml"
 
-# Fallback local paths when a repo's localPathEnv is unset. While this package is
-# still embedded in tali-platform, default that repo to the dir containing north-star
-# (i.e. the tali-platform root) so drift is verifiable regardless of the cwd. Once
-# extracted to its own repo, set TALI_PLATFORM_PATH explicitly instead.
-DEFAULT_PATHS = {"tali-platform": str(ROOT.parent)}
+# Fallback local paths when a repo's localPathEnv is unset. north-star is now a
+# standalone repo, so there is no reliable default checkout for the legacy
+# tali-platform mappings: set TALI_PLATFORM_PATH to a tali-platform checkout to
+# verify them; otherwise they're reported unverifiable (skipped in non-strict CI).
+DEFAULT_PATHS: dict[str, str] = {}
 
 
 def resolve_repo_paths(repos: list[dict]) -> dict[str, Path | None]:
